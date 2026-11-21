@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#161616" />
+  <title>Maki Makio — Flipbook</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- PDF.js: convierte cada página del PDF en un canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <!-- StPageFlip: efecto realista de pasar página -->
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-block" aria-label="Maki Makio flipbook">
+        <span class="brand-dot"></span>
+        <div>
+          <p class="eyebrow">Maki Makio</p>
+          <h1>Flipbok</h1>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <label class="file-button" for="pdfInput" title="Cargar otro PDF">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5"/></svg>
+          Cambiar PDF
+        </label>
+        <input id="pdfInput" type="file" accept="application/pdf,.pdf" hidden />
+
+        <button id="fullscreenBtn" class="icon-button" type="button" aria-label="Pantalla completa" title="Pantalla completa">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section id="viewerStage" class="viewer-stage" aria-label="Visor del manual">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+
+      <div id="dropHint" class="drop-hint" aria-hidden="true">
+        <div class="drop-card">
+          <strong>Suelta tu PDF aquí</strong>
+          <span>y se convertirá automáticamente en flipbook</span>
+        </div>
+      </div>
+
+      <div id="loading" class="loading-card" role="status" aria-live="polite">
+        <div class="spinner"></div>
+        <div class="loading-copy">
+          <strong id="loadingTitle">Preparando el manual…</strong>
+          <span id="loadingText">Cargando PDF</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div id="bookWrap" class="book-wrap" hidden>
+        <div id="book" class="book" aria-label="Flipbook"></div>
+      </div>
+
+      <button id="prevBtn" class="nav-arrow nav-prev" type="button" aria-label="Página anterior" title="Página anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <button id="nextBtn" class="nav-arrow nav-next" type="button" aria-label="Página siguiente" title="Página siguiente">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </section>
+
+    <footer class="controlbar">
+      <div class="page-status">
+        <span id="currentPage">1</span>
+        <span class="page-separator">/</span>
+        <span id="totalPages">—</span>
+      </div>
+
+      <div class="mini-controls">
+        <button id="firstBtn" type="button" class="text-control">Inicio</button>
+        <button id="lastBtn" type="button" class="text-control">Final</button>
+      </div>
+
+      <p class="helper-text">Arrastra una esquina, haz clic o usa ← →</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
